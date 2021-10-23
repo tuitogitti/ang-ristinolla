@@ -10,10 +10,12 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./board.component.css']
 })
 export class BoardComponent implements OnInit {
-    // Pelin tila eli state tallennetaan squares -taulukkoon
-    squares: any[]; // Taulukko jossa on eri tyyppisiä arvoja: null, 'X', '0'
-    xIsNext: boolean; // Kertoo kumpi on seuraavaksi vuorossa
-    winner: string; // Kertoo voittajan 'X' tai '0'
+    // !:n ansiosta muuttujaa ei tarvitse alustaa konstruktorissa ja silti
+    // oletetaan että arvo on taulukko tai boolean, eikä undefined (TS-syntaksia)
+    squares!: any[]; // Taulukko jossa on pelin tila, eli arvoja: null, 'X', '0'
+    xIsNext!: boolean; // Kertoo kumpi on seuraavaksi vuorossa
+    // ! ei tarvita, koska arvo voi olla mikä tahansa
+    winner: any; // Kertoo voittajan null, 'X' tai '0'
 
     constructor() { }
 
@@ -59,8 +61,8 @@ export class BoardComponent implements OnInit {
         // Yritetään määritellä voittaja. Metodi tuottaa 'X', '0' tai null
         // tilanteesta riippuen. Jos voittaja on olemassa, se näytetään templaatissa.
         this.winner = this.calculateWinner();
-
     }
+    
     // Metodi joka määrittää pelin voittajan
     calculateWinner() {
         const lines = [
@@ -85,7 +87,4 @@ export class BoardComponent implements OnInit {
         }
         return null;
     }
-
-
-
 }

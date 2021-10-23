@@ -11,7 +11,8 @@ export class SquareComponent implements OnInit {
     X ja O ovat mahdolliset sisään tulevat arvot, muita ei hyväksytä. Pystyviiva on
     Typescriptin unioni -merkintä.
     */
-    @Input() value: 'X' | '0';
+    @Input()
+    value!: 'X' | '0';
 
     constructor() {}
 
