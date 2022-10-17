@@ -10,14 +10,21 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./board.component.css']
 })
 export class BoardComponent implements OnInit {
-    // !:n ansiosta muuttujaa ei tarvitse alustaa konstruktorissa ja silti
-    // oletetaan että arvo on taulukko tai boolean, eikä undefined (TS-syntaksia)
+    /* !-operaattorin (TS-syntaksia) ansiosta luokan propertyjä ei tarvitse alustaa 
+    konstruktorissa ja silti oletetaan että propertyjen arvot ovat tyypin
+    mukaiset, eivätkä undefined. Voidaan myös sallia undefined-tyyppi 
+    merkinnällä: property: type | undefined 
+    */ 
     squares!: any[]; // Taulukko jossa on pelin tila, eli arvoja: null, 'X', '0'
     xIsNext!: boolean; // Kertoo kumpi on seuraavaksi vuorossa
     // ! ei tarvita, koska arvo voi olla mikä tahansa
     winner: any; // Kertoo voittajan null, 'X' tai '0'
 
-    constructor() { }
+    constructor() { 
+        // Propertyjä ei alusteta tässä sovelluksessa konstruktorissa, mutta jos
+        // niin tehtäisiin, niin !-operaattoria propertyn perässä ei tarvittaisi.
+        // this.squares = [];
+    }
 
     ngOnInit() {
         this.newGame(); // newGame suoritetaan aina kun komponentti alustetaan
