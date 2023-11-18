@@ -1,22 +1,19 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
 
 @Component({
-    selector: 'app-square',
-    templateUrl: './square.component.html',
-    styleUrls: ['./square.component.css']
+  selector: 'app-square',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './square.component.html',
+  styleUrl: './square.component.css',
 })
-export class SquareComponent implements OnInit {
-    /*
-    @Input() tarkoittaa että value -muuttujan arvo tulee syötteenä sisään äitikomponentilta.
-    X ja O ovat mahdolliset sisään tulevat arvot, muita ei hyväksytä. Pystyviiva on
-    Typescriptin unioni -merkintä.
-    */
-    @Input()
-    value!: 'X' | '0';
-
-    constructor() {}
-
-    ngOnInit() {
-    }
-
+export class SquareComponent {
+  /* @Input() tarkoittaa että value -propertyn arvo
+     tulee syötteenä sisään äitikomponentilta.
+     Propertyä turha alustaa (!-merkintä), koska
+     arvo tulee aina äitikomponentilta
+  */
+  @Input()
+  value!: string;
 }

@@ -2,40 +2,40 @@
 Board on ns. toiminnallinen eli "älykäs" komponentti joka sisältää
 sovelluslogiikan.
 */
+
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { SquareComponent } from '../square/square.component';
 
 @Component({
+    standalone: true,
+    imports: [CommonModule, SquareComponent],
     selector: 'app-board',
     templateUrl: './board.component.html',
-    styleUrls: ['./board.component.css']
+    styleUrl: './board.component.css'
 })
 export class BoardComponent implements OnInit {
-    /* !-operaattorin (TS-syntaksia) ansiosta luokan propertyjä ei tarvitse alustaa 
-    konstruktorissa ja silti oletetaan että propertyjen arvot ovat tyypin
-    mukaiset, eivätkä undefined. Voidaan myös sallia undefined-tyyppi 
-    merkinnällä: property: type | undefined 
-    */ 
-    squares!: any[]; // Taulukko jossa on pelin tila, eli arvoja: null, 'X', '0'
+    
+    /* Propertyt eivät voi olla undefined (!-merkintä), koska ne alustetaan
+       newGame() -metodissa aina kun peli alkaa. Niitä on siis turha alustaa
+       konstruktorissa 
+    */
+    squares!: string[]; // Taulukko jossa on pelin tila, eli arvoja: '', 'X', '0'
     xIsNext!: boolean; // Kertoo kumpi on seuraavaksi vuorossa
-    // ! ei tarvita, koska arvo voi olla mikä tahansa
-    winner: any; // Kertoo voittajan null, 'X' tai '0'
+    winner!: string; // Kertoo voittajan '', 'X' tai '0'
 
-    constructor() { 
-        // Propertyjä ei alusteta tässä sovelluksessa konstruktorissa, mutta jos
-        // niin tehtäisiin, niin !-operaattoria propertyn perässä ei tarvittaisi.
-        // this.squares = [];
-    }
+    constructor() {}
 
     ngOnInit() {
-        this.newGame(); // newGame suoritetaan aina kun komponentti alustetaan
+        this.newGame(); // newGame suoritetaan aina kun komponentti latautuu muistiin
     }
     // newGame() -metodin suoritus käynnistää uuden pelin
     newGame() {
         // Kun uusi peli alkaa, pelin muuttujat alustetaan.
         // Squares-taulukkoon laitetaan 9 tyhjää paikkaa
-        this.squares = Array(9).fill(null);
+        this.squares = Array(9).fill('');
         this.xIsNext = true;
-        this.winner = null;
+        this.winner = '';
     }
 
     /*
@@ -58,14 +58,14 @@ export class BoardComponent implements OnInit {
 
     // makeMove(index: number) laittaa ristin tai nollan squares -taulukkoon indeksiin index
     makeMove(index: number) {
-        // Paikan johon risti tai nolla laitetaan pitää olla tyhjä, eli null
+        // Paikan johon risti tai nolla laitetaan pitää olla tyhjä, eli ''
         if (!this.squares[index]) {
             // splice-metodi poistaa indeksistä alkion ja laittaa
             // tilalle yhden alkion joka tulee this.player -get propertyltä
             this.squares.splice(index, 1, this.player);
             this.xIsNext = !this.xIsNext; // Vaihdetaan vuoroa
         }
-        // Yritetään määritellä voittaja. Metodi tuottaa 'X', '0' tai null
+        // Yritetään määritellä voittaja. Metodi tuottaa 'X', '0' tai ''
         // tilanteesta riippuen. Jos voittaja on olemassa, se näytetään templaatissa.
         this.winner = this.calculateWinner();
     }
@@ -92,6 +92,6 @@ export class BoardComponent implements OnInit {
                 return this.squares[a]; // palautetaan 'X' tai '0'
             }
         }
-        return null;
+        return ''; // ei voittajaa
     }
 }
