@@ -18,4 +18,6 @@
 </div>
 
 <!-- Kappale näytetään vain jos *ngIf='winner' on true eli winner on olemassa-->
-<p *ngIf="winner">Pelaaja {{ winner }} voitti pelin!</p>
+@if(winner){
+<p>Pelaaja {{ winner }} voitti pelin!</p>
+}

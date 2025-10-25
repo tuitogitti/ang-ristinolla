@@ -1,11 +1,17 @@
 /*
-Moduulittoman standalone-sovelluksen konffitiedosto,
+Angular-sovelluksen konffitiedosto,
 jonne tulevat koko sovellukselle yhteiset määritykset,
-kuten esim. reititys, in-memory-web-api yms. Tässä ei 
-nyt ole mitään määrityksiä
+kuten esim. reititys, in-memory-web-api yms. 
 */
-import { ApplicationConfig } from '@angular/core';
+import {
+  ApplicationConfig,
+  provideBrowserGlobalErrorListeners,
+  provideZoneChangeDetection,
+} from '@angular/core';
 
 export const appConfig: ApplicationConfig = {
-  providers: []
+  providers: [
+    provideBrowserGlobalErrorListeners(),
+    provideZoneChangeDetection({ eventCoalescing: true }),
+  ],
 };
