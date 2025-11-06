@@ -12,7 +12,7 @@
   <!-- taulukon jokaisen alkion index otetaan talteen i -muuttujaan
     joka välitetään makeMove(i) -metodille. Event binding: click -event
     bindataan makeMove(i) -metodiin -->
-  @for (val of squares; track val; let i = $index) {
+  @for (val of squares; track $index; let i = $index) {
   <app-square [value]="val" (click)="makeMove(i)"> </app-square>
   }
 </div>
