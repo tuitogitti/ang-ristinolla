@@ -3,21 +3,21 @@
 
 <p>Vuorossa pelaaja: {{ player }}</p>
 
-<!--peli tehdään tämän divin sisälle. Sisällä olevat elementit on laitettu CSS-gridiin.-->
+<!--Peli tehdään tämän divin sisälle. Sisällä olevat elementit on laitettu CSS-gridiin.-->
 <div class="board">
   <!--@for toistaa  app-square -elementtiä niin kauan kuin
-    squares-taulukossa on alkioita, eli 9 kertaa-->
+    squares-taulukossa on alkioita, eli 9 kertaa -->
   <!-- val bindataan square-komponentin value-muuttujaan
-         se viittaa siis squares-taulukon alkoihin-->
-  <!-- taulukon jokaisen alkion index otetaan talteen i -muuttujaan
-    joka välitetään makeMove(i) -metodille. Event binding: click -event
-    bindataan makeMove(i) -metodiin -->
-  @for (val of squares; track $index; let i = $index) {
-  <app-square [value]="val" (click)="makeMove(i)"> </app-square>
+         se viittaa siis squares-taulukon alkoihin -->
+  <!-- taulukon jokaisen alkion index välitetään makeMove($index)
+   -metodille. Event binding: click -event bindataan makeMove($index)
+   -metodiin -->
+  @for (val of squares; track $index) {
+  <app-square [value]="val" (click)="makeMove($index)"> </app-square>
   }
 </div>
 
-<!-- Kappale näytetään vain jos *ngIf='winner' on true eli winner on olemassa-->
+<!-- Kappale näytetään vain jos winner on true eli winner on olemassa-->
 @if(winner){
 <p>Pelaaja {{ winner }} voitti pelin!</p>
 }

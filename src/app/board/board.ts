@@ -13,15 +13,13 @@ import { Square } from '../square/square';
   styleUrl: './board.css',
 })
 export class Board implements OnInit {
-  /* Propertyt eivät voi olla undefined (!-merkintä), koska ne alustetaan
-       newGame() -metodissa aina kun peli alkaa. Niitä on siis turha alustaa
-       konstruktorissa 
-    */
+  /*Voidaan luottaa siihen, että propertyt eivät ole undefined (!-merkintä), 
+    koska ne alustetaan newGame()-metodissa aina kun peli alkaa. Niitä on siis 
+    turha alustaa konstruktorissa. 
+  */
   squares!: string[]; // Taulukko jossa on pelin tila, eli arvoja: '', 'X', '0'
   xIsNext!: boolean; // Kertoo kumpi on seuraavaksi vuorossa
   winner!: string; // Kertoo voittajan '', 'X' tai '0'
-
-  constructor() {}
 
   ngOnInit() {
     this.newGame(); // newGame suoritetaan aina kun komponentti latautuu muistiin

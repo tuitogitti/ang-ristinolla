@@ -1,7 +1,7 @@
 /*
 Angular-sovelluksen konffitiedosto,
 jonne tulevat koko sovellukselle yhteiset määritykset,
-kuten esim. reititys, in-memory-web-api yms. 
+kuten esim. reititys, in-memory-web-api yms.
 */
 import {
   ApplicationConfig,
